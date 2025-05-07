@@ -1,0 +1,18 @@
+ [SerializeField] float hitpoint = 10f;
+    [SerializeField] float DestroyDelay = 2f;
+    
+    public void TakeDamage(float Damage)
+{
+    BroadcastMessage("EnemyDamageTaken");
+    hitpoint = hitpoint - Damage;
+    if (hitpoint < 0)
+        {
+            GetComponent<Animator>().SetBool("Dead", true);
+        }
+    }
+
+    IEnumerator DestroyObject()
+    {
+        Destroy(gameObject);
+        yield return new WaitForSeconds(DestroyDelay);
+    }
